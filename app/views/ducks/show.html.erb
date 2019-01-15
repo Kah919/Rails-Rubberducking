@@ -1,0 +1,5 @@
+<h1>Duck's Profile</h1>
+<%= @duck.name %> has <%= @duck.description %>
+<%= button_to "Edit", duck_path(@duck) %> <!-- work on this -->
+
+<%= button_to "Delete", duck_path, method: :delete %>
