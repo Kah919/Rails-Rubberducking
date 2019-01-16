@@ -6,11 +6,18 @@ class DucksController < ApplicationController
 
   def new
     @duck = Duck.new
+    @student = Student.all
   end
 
   def create
     @duck = Duck.create(params_duck)
-    redirect_to duck_path(@duck)
+    if @duck.valid?
+     redirect_to duck_path(@duck)
+    else
+      flash[:error] = @duck.errors.full_messages
+      @student = Student.all
+      render :new
+    end
   end
 
   def show

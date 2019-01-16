@@ -10,7 +10,12 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.create(params_student)
-    redirect_to student_path(@student)
+    if @student.valid?
+      redirect_to student_path(@student)
+    else
+      flash[:error] = @student.errors.full_messages
+      render :new
+    end
   end
 
   def show
@@ -23,12 +28,13 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
-    if @student.update(params_student).valid?
-      @student.update(params_student)
+    @student.update(params_student)
+    if @student.valid?
+      redirect_to student_path(@student)
     else
+      flash[:error] = @student.errors.full_messages
       render :edit
     end
-    # redirect_to student_path(@student)
   end
 
   def delete

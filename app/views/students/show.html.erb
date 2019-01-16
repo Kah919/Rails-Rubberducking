@@ -1,3 +1,11 @@
+<h1>Student Info</h1>
 <%= @student.name %> is in mod <%= @student.mod %>
-
+<%= button_to "Edit", students_edit_path, method: :get %>
 <%= button_to "Delete", student_path, method: :delete %>
+
+<h2>All Ducks</h2>
+<ul>
+  <% @student.ducks.each do |duck| %>
+  <li> <%= duck.name %> </li>
+  <% end %>
+</ul>
